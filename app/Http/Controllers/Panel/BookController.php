@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
 use App\Models\Book;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('books.index')->with([
+            'books' => Book::without('images')->get()
+        ]);
     }
 
     /**

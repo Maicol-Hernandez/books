@@ -14,10 +14,21 @@ class ImageFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
+        $fileName = $this->faker->numberBetween(1, 10) . '.png';
+
         return [
-            //
+            'path' => "img/books/{$fileName}",
         ];
+    }
+
+    public function user()
+    {
+        $fileName = $this->faker->numberBetween(1, 5) . '.jpg';
+
+        return $this->state([
+            'path' => "img/users/{$fileName}",
+        ]);
     }
 }
