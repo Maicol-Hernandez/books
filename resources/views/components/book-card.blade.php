@@ -26,7 +26,7 @@
             {{ $book->title }}
         </h5>
         <p class="card-text">{{ $book->description }}</p>
-        <p class="card-text"><strong>{{ $book->author }} left</strong></p>
+        <p class="card-text"><strong>{{ $book->author }}</strong></p>
     </div>
     <div class="card-footer text-muted">
         @isset($cart)

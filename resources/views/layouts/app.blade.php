@@ -40,10 +40,13 @@
                             </li>
                         @endif
                         <li class="nav-item">
-                            {{-- <a class="nav-link" href="{{ route('carts.index') }}">{{ __('Cart') }}
-                                @inject('cartService', 'App\Services\CartService')
-                                ({{ $cartService->countProducts() }})
-                            </a> --}}
+                            <a class="nav-link"
+                                href="
+                            {{-- {{ route('carts.index') }} --}}
+                            ">{{ __('Reservations') }}
+                                {{-- @inject('cartService', 'App\Services\CartService') --}}
+                                {{-- ({{ $cartService->countProducts() }}) --}}
+                            </a>
                         </li>
                     </ul>
 
