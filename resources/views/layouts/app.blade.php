@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
@@ -34,7 +34,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (optional(auth()->user())->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('panel.index') }}">{{ __('Panel') }}</a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            {{-- <a class="nav-link" href="{{ route('carts.index') }}">{{ __('Cart') }}
+                                @inject('cartService', 'App\Services\CartService')
+                                ({{ $cartService->countProducts() }})
+                            </a> --}}
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,7 +77,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -83,7 +93,25 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container-fluid">
+                @if (session()->has('success'))
+                    <div class="alert alert-success" role="alert">
+                        <span>{{ session()->get('success') }}</span>
+                    </div>
+                @endif
+
+                @if (isset($errors) && $errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li><span>{{ $error }}</span></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
