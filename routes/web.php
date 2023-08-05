@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Panel\MainController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\BookReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::get('/', [MainController::class, 'index'])->name('main');
 
 Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+// Books Reservations
+Route::resource('books.reservations', BookReservationController::class)->only(['store', 'destroy']);
 // reservations
 Route::resource('reservations', ReservationController::class);
 // Books

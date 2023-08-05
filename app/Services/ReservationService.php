@@ -23,7 +23,7 @@ class ReservationService
      * 
      * @return \App\Models\Reservation $reservation
      */
-    public function getFromCookie(): Reservation
+    public function getFromCookie(): ?Reservation
     {
         $reservationId = Cookie::get($this->cookieName);
 

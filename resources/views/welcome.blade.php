@@ -8,14 +8,44 @@
         </div>
     @endempty
     <div class="row justify-content-center align-items-center g-2">
-        {{-- @dump($books) --}}
-        @foreach ($books as $book)
-            <div class="col-3">
-                @include('components.book-card')
-            </div>
-        @endforeach
-        {{-- @dump($books) --}}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="card_title">
+                                    {{ __('Books') }}
+                                </span>
+                            </div>
+                        </div>
 
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">description</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($books as $book)
+                                            @include('components.book-card')
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- {!! $categorias->links() !!} --}}
+                </div>
+            </div>
+        </div>
+        {{-- @dump($books) --}}
         {{-- @dd(\Illuminate\Support\Facades\DB::getQueryLog()) --}}
     </div>
 @endsection
