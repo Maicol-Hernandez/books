@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('description', 1000);
-            // $table->string('status')->default('unavailable');
+            $table->string('status')->default('unavailable');
             $table->softDeletes();
             $table->timestamps();
         });

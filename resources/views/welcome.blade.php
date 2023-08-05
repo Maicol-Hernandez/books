@@ -49,3 +49,13 @@
         {{-- @dd(\Illuminate\Support\Facades\DB::getQueryLog()) --}}
     </div>
 @endsection
+
+
+<script type="text/javascript">
+    // const showModal = () => {
+    //     // const reservationModal = document.getElementById('reservationModal')
+    //     const reservationModal = new bootstrap.Modal(document.getElementById('reservationModal'));
+
+    //     reservationModal.show()
+    // }
+</script>

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $title
  * @property string $author
  * @property string $description 
+ * @property string $status 
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * 
@@ -43,6 +44,7 @@ class Book extends Model
         'title',
         'author',
         'description',
+        'status',
     ];
 
     /** 

@@ -33,7 +33,7 @@
     </td>
     <td scope="row">{{ $book->author }}</td>
     <td scope="row">{{ $book->description }}</td>
-    <td>
+    <td class="text-end">
         @isset($reservation)
             <form class="d-inline" method="POST"
                 action="{{ route('books.reservations.destroy', ['reservation' => $reservation->id, 'book' => $book->id]) }}">
@@ -42,10 +42,16 @@
                 <button type="submit" class="btn btn-danger">Remove reservationt</button>
             </form>
         @else
-            <form class="d-inline" method="POST" action="{{ route('books.reservations.store', ['book' => $book->id]) }}">
-                @csrf
-                <button type="submit" class="btn btn-success">Add To Reservation</button>
-            </form>
+            <a class="btn btn-sm btn btn-success" data-bs-toggle="modal" href="#reservationModalToggle{{ $book->id }}"
+                title="{{ 'Add To Reservation' }}" role="button">
+                <span>{{ 'Add To Reservation' }}</span>
+            </a>
+            @include('reservations.create')
         @endisset
+        {{-- <a class="btn btn-soft-success btn-circle btn-sm p-2"
+                href="{{ route('panel.carrier-packages.index', [$shippoCarrier->id, 'lang' => env('DEFAULT_LANGUAGE')]) }}"
+                title="{{ translate('Packages') }}">
+                <i class="las la-box mr-1"></i><span>{{ translate('Packages') }}</span>
+            </a> --}}
     </td>
 </tr>

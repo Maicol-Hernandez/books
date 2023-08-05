@@ -1,3 +1,20 @@
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr('.datepicker', {
+        mode: "range",
+        // minDate: "today",
+        // dateFormat: "Y-m-d",
+        // disable: [
+        //     function (date) {
+        //         // disable every multiple of 8
+        //         return !(date.getDate() % 8);
+        //     }
+        // ]
+    });
+});
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when

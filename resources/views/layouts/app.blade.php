@@ -109,8 +109,15 @@
                         </ul>
                     </div>
                 @endif
-
+                {{-- Content --}}
                 @yield('content')
+
+                {{-- Modal --}}
+                @yield('modal')
+
+                {{-- Script --}}
+                @yield('script')
+                
             </div>
         </main>
     </div>
