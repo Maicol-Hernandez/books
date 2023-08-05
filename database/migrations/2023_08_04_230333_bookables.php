@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            // $table->bigInteger('user_id')->unsigned();
-            // $table->bigInteger('book_id')->unsigned();
-            $table->timestamps();
+        Schema::create('bookables', function (Blueprint $table) {
+            $table->bigInteger('book_id')->unsigned();
+            $table->integer('quantity')->unsigned();
+            $table->morphs('bookable');
+
+            $table->foreign('book_id')->references('id')->on('books');
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('bookables');
     }
 };

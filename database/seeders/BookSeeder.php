@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use App\Models\Image;
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,11 +15,20 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
+        $reservarions = Reservation::all();
+
         Book::factory(50)
             ->create()
-            ->each(function (Book $product) {
+            ->each(function (Book $book) use ($reservarions): void {
+                $reservarion = $reservarions->random();
+
+                $reservarion->books()->attach([
+                    $book->id => ['quantity' => mt_rand(1, 3)]
+                ]);
+
                 $images = Image::factory(mt_rand(2, 4))->make();
-                $product->images()->saveMany($images);
+
+                $book->images()->saveMany($images);
             });
     }
 }

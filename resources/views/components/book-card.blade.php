@@ -29,12 +29,12 @@
         <p class="card-text"><strong>{{ $book->author }}</strong></p>
     </div>
     <div class="card-footer text-muted">
-        @isset($cart)
-            <p class="card-text">{{ $book->pivot->quantity }} in your cart
+        @isset($reservation)
+            <p class="card-text">{{ $book->pivot->quantity }} in your reservation
                 <strong>(${{ $book->total }})</strong>
             </p>
             <form class="d-inline" method="POST"
-                action="{{ route('products.carts.destroy', ['cart' => $cart->id, 'book' => $book->id]) }}">
+                action="{{ route('products.carts.destroy', ['reservation' => $reservation->id, 'book' => $book->id]) }}">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Remove From Cart</button>

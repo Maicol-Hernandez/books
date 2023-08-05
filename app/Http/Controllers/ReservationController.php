@@ -6,15 +6,25 @@ use App\Models\Reservation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Services\ReservationService;
 
 class ReservationController extends Controller
 {
+    public ReservationService $reservationService;
+
+    public function __construct(ReservationService $reservationService)
+    {
+        $this->reservationService = $reservationService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('reservations.index')->with([
+            'reservation' => $this->reservationService->getFromCookie(),
+        ]);
     }
 
     /**
