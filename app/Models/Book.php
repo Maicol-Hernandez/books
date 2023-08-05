@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\AvailableScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -62,6 +63,24 @@ class Book extends Model
     protected $casts = [];
 
     /**
+     * The "booted" method of the model.
+     * 
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new AvailableScope);
+
+        static::updated(function (Book $book): void {
+            if ($book->status == 'available') {
+                $book->status == 'unavailable';
+
+                $book->save();
+            }
+        });
+    }
+
+    /**
      * The images that belong to the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -69,5 +88,25 @@ class Book extends Model
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    /**
+     * Makes a query where the status is available.
+     * 
+     * @param mixed $query
+     */
+    public function scopeAvailable($query)
+    {
+        $query->where('status', 'available');
+    }
+
+    /**
+     * Return total, quantity.
+     * 
+     * @return int
+     */
+    public function getTotalAttribute()
+    {
+        return $this->pivot->quantity;
     }
 }

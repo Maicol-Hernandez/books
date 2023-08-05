@@ -39,19 +39,14 @@
                 action="{{ route('books.reservations.destroy', ['reservation' => $reservation->id, 'book' => $book->id]) }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Remove reservationt</button>
+                <button type="submit" class="btn btn-danger">Remove Reservation</button>
             </form>
         @else
             <a class="btn btn-sm btn btn-success" data-bs-toggle="modal" href="#reservationModalToggle{{ $book->id }}"
                 title="{{ 'Add To Reservation' }}" role="button">
-                <span>{{ 'Add To Reservation' }}</span>
+                <span>Add To Reservation</span>
             </a>
             @include('reservations.create')
         @endisset
-        {{-- <a class="btn btn-soft-success btn-circle btn-sm p-2"
-                href="{{ route('panel.carrier-packages.index', [$shippoCarrier->id, 'lang' => env('DEFAULT_LANGUAGE')]) }}"
-                title="{{ translate('Packages') }}">
-                <i class="las la-box mr-1"></i><span>{{ translate('Packages') }}</span>
-            </a> --}}
     </td>
 </tr>

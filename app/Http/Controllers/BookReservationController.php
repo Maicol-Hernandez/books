@@ -41,8 +41,8 @@ class BookReservationController extends Controller
      */
     public function store(Request $request, Book $book)
     {
-        dump($book);
-        dd($request->all());
+        // dump($book);
+        // dd($request->all());
         $reservation = $this->reservationService->getFromCookieOrCreate();
 
         $quantity = $reservation->books()

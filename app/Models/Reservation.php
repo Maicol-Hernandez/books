@@ -20,4 +20,14 @@ class Reservation extends Model
     {
         return $this->morphToMany(Book::class, 'bookable')->withPivot('quantity');
     }
+
+    /**
+     * Return sum total.
+     * 
+     * @return int
+     */
+    public function getTotalAttribute()
+    {
+        return $this->books->pluck('total')->sum();
+    }
 }

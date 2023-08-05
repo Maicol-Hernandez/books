@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+/**
+ * Class Order
+ *
+ * @property $id
+ * @property $status
+ * @property $created_at
+ * @property $updated_at
+ * 
+ * @package App\Models
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Order extends Model
 {
     use HasFactory;
