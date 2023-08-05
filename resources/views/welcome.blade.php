@@ -34,7 +34,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($books as $book)
-                                            @include('components.book-card')
+                                            @include('components.book-table')
                                         @endforeach
                                     </tbody>
                                 </table>

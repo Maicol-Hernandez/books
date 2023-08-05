@@ -14,7 +14,7 @@
         <div class="row justify-start-center align-items-center g-2">
             @foreach ($reservation->books as $book)
                 <div class="col-3">
-                    @include('components.book-card')
+                    @include('components.book-table')
                 </div>
             @endforeach
         </div>
