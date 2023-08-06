@@ -8,12 +8,12 @@
         </div>
     @else
         <h4 class="text-center">Your reservation Total: <strong>{{ $reservation->total }}</strong></h4>
-        <form class="d-inline" method="POST" action="{{ route('orders.store') }}">
+        {{-- <form class="d-inline" method="POST" action="{{ route('orders.store') }}">
             @csrf
             <button type="submit" class="btn btn-success mb-3">
                 Confirm Reservation
             </button>
-        </form>
+        </form> --}}
 
         <div class="row justify-content-center align-items-center g-2">
             <div class="container-fluid">

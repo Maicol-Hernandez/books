@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Book;
-// use Illuminate\Support\Str;
+use App\Models\PanelBook;
 use App\Models\Reservation;
-// use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\ReservationService;
 use Illuminate\Validation\ValidationException;
@@ -46,34 +46,40 @@ class BookReservationController extends Controller
     public function store(Request $request, Book $book)
     {
         $reservation = $this->reservationService->getFromCookieOrCreate();
-        // $quantity = $reservation->books()
-        //     ->find($book->id)
-        //     ->pivot
-        //     ->quantity ?? 0;
 
-        // if ($book->stock < $quantity + 1) {
-        //     throw ValidationException::withMessages([
-        //         'boo$book' => "There is not enough stock for the quantity you required of {$book->title}",
+        DB::transaction(function () use ($request, $reservation, $book) {
+            // $quantity = $reservation->books()
+            //     ->find($book->id)
+            //     ->pivot
+            //     ->quantity ?? 0;
 
-        //     ]);
-        // }
+            // if ($book->stock < $quantity + 1) {
+            //     throw ValidationException::withMessages([
+            //         'boo$book' => "There is not enough stock for the quantity you required of {$book->title}",
 
-        $dates = explode(' to ', $request->date_range);
+            //     ]);
+            // }
 
-        $startDate = Carbon::parse(trim($dates[0]));
-        $endDate = Carbon::parse(trim($dates[1]));
+            $dates = explode(' to ', $request->date_range);
 
-        $reservation->books()->syncWithoutDetaching([
-            $book->id => [
-                'start_date' => $startDate->format('Y-m-d H:i:s'),
-                'end_date' => $endDate->format('Y-m-d H:i:s'),
-            ]
-        ]);
+            $startDate = Carbon::parse(trim($dates[0]));
+            $endDate = Carbon::parse(trim($dates[1]));
 
-        $reservation->touch();
+            $reservation->books()->syncWithoutDetaching([
+                $book->id => [
+                    'start_date' => $startDate->format('Y-m-d H:i:s'),
+                    'end_date' => $endDate->format('Y-m-d H:i:s'),
+                ]
+            ]);
+
+            $book = $book->update([
+                'status' => 'unavailable'
+            ]);
+
+            $reservation->touch();
+        }, 5);
 
         $cookie = $this->reservationService->makeCookie($reservation);
-
         return redirect()->back()->cookie($cookie);
     }
 
@@ -104,13 +110,19 @@ class BookReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book, Reservation $reservation)
+    public function destroy(PanelBook $book, Reservation $reservation)
     {
-        $reservation->books()->detach([
-            $book->id
-        ]);
+        DB::transaction(function () use ($book, $reservation) {
+            $reservation->books()->detach([
+                $book->id
+            ]);
 
-        $reservation->touch();
+            $reservation->touch();
+
+            $book = $book->update([
+                'status' => 'available'
+            ]);
+        }, 5);
 
         $cookie = $this->reservationService->makeCookie($reservation);
 

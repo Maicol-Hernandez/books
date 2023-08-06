@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Http\Controllers\Controller;
+use App\Services\ReservationService;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
-use App\Services\ReservationService;
 
 class ReservationController extends Controller
 {

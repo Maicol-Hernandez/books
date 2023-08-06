@@ -67,7 +67,7 @@ class Book extends Model
      * 
      * @return void
      */
-    protected static function booted(): void
+    protected static function booted()
     {
         static::addGlobalScope(new AvailableScope);
 
@@ -101,12 +101,23 @@ class Book extends Model
     }
 
     /**
+     * Makes a query where the status is unavailable.
+     * 
+     * @param mixed $query
+     */
+    public function scopeUnavailable($query)
+    {
+        $query->where('status', 'unavailable');
+    }
+
+
+    /**
      * Return total, quantity.
      * 
      * @return int
      */
     public function getTotalAttribute()
     {
-        return $this->pivot->quantity;
+        return $this->pivot->book_id;
     }
 }

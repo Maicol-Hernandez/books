@@ -64,7 +64,7 @@ class ReservationService
         $reservation = $this->getFromCookie();
 
         if (!is_null($reservation)) {
-            return $reservation->books->pluck('pivot.quantity')->sum();
+            return $reservation->books->pluck('pivot.book_id')->count();
         }
 
         return 0;

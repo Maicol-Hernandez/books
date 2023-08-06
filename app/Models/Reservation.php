@@ -18,7 +18,7 @@ class Reservation extends Model
      */
     public function books(): MorphToMany
     {
-        return $this->morphToMany(Book::class, 'bookable');
+        return $this->morphToMany(PanelBook::class, 'bookable')->withPivot('book_id');
     }
 
     /**
@@ -28,6 +28,6 @@ class Reservation extends Model
      */
     public function getTotalAttribute()
     {
-        return $this->books->pluck('total')->sum();
+        return $this->books->pluck('total')->count();
     }
 }
