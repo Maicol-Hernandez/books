@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ImageSeeder::class,
             ReservationSeeder::class,
-            OrderSeeder::class,
+            // OrderSeeder::class,
             BookSeeder::class,
         ]);
     }

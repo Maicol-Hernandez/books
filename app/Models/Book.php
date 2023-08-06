@@ -81,6 +81,17 @@ class Book extends Model
     }
 
     /**
+     * The Reservations that belong to the Books
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reservations()
+    {
+        return $this->morphedByMany(Reservation::class, 'bookable')->withPivot(['start_date', 'end_date']);
+    }
+
+
+    /**
      * The images that belong to the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

@@ -18,7 +18,7 @@ class Reservation extends Model
      */
     public function books(): MorphToMany
     {
-        return $this->morphToMany(PanelBook::class, 'bookable')->withPivot('book_id');
+        return $this->morphToMany(PanelBook::class, 'bookable')->withPivot(['start_date', 'end_date']);
     }
 
     /**

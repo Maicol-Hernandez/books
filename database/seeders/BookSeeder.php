@@ -20,18 +20,17 @@ class BookSeeder extends Seeder
         $orders = Order::all();
 
         Book::factory(50)
-            ->create()
-            ->each(function (Book $book) use ($reservarions, $orders): void {
+            ->create()->each(function (Book $book) use ($reservarions, $orders): void {
                 $reservarion = $reservarions->random();
 
                 $reservarion->books()->attach([
                     $book->id => [
-                        'start_date' => now(),
-                        'end_date' => now()->addDays(5)
+                        'start_date' => now()->subDays(3),
+                        'end_date' => now()->subDays(1)
                     ],
                 ]);
 
-                $orders = $orders->random();
+                // $orders = $orders->random();
 
                 // $orders->books()->attach([
                 //     $book->id => ['quantity' => mt_rand(1, 3)]

@@ -37,6 +37,8 @@
                                                 <th scope="col">Title</th>
                                                 <th scope="col">Author</th>
                                                 <th scope="col">description</th>
+                                                <th scope="col">Start Date</th>
+                                                <th scope="col">End Date</th>
                                                 <th scope="col">Actions</th>
                                             </tr>
                                         </thead>

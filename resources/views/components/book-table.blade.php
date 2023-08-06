@@ -33,6 +33,11 @@
     </td>
     <td scope="row">{{ $book->author }}</td>
     <td scope="row">{{ $book->description }}</td>
+    @isset($reservation)
+    {{-- @dump($book) --}}
+        <td scope="row">{{ $book->pivot->start_date }}</td>
+        <td scope="row">{{ $book->pivot->end_date }}</td>
+    @endisset
     <td class="text-end">
         @isset($reservation)
             <form class="d-inline" method="POST"
