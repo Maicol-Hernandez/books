@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Scopes\AvailableScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -90,6 +91,15 @@ class Book extends Model
         return $this->morphedByMany(Reservation::class, 'bookable')->withPivot(['start_date', 'end_date']);
     }
 
+    /**
+     * Get the categories that owns the Book
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /**
      * The images that belong to the Product

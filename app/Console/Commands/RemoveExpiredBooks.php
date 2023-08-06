@@ -30,9 +30,12 @@ class RemoveExpiredBooks extends Command
         $deadline = now()->subDays($this->option('days'));
 
         Reservation::all()->each(function (Reservation $reservation) use ($counter, $deadline): void {
-            $expiredBooks = $reservation->books()->whereDate('end_date', '<=', $deadline)->get();
-
-            $counter->push($reservation->books()->detach($expiredBooks->pluck('id')));
+            $expiredBooks = $reservation->books()->where('end_date', '<=', $deadline)->get();
+            foreach ($expiredBooks as $book) {
+                $book->status = 'available';
+                $book->save();
+                $counter->push($reservation->books()->detach($book->id));
+            }
         });
 
         $this->info("Done! {$counter->sum()} books were removed.");
