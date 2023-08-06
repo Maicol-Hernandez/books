@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Book;
+// use Illuminate\Support\Str;
 use App\Models\Reservation;
+// use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ReservationService;
@@ -17,6 +20,7 @@ class BookReservationController extends Controller
     public function __construct(ReservationService $reservationService)
     {
         $this->reservationService = $reservationService;
+        $this->middleware('auth');
     }
 
 
@@ -41,14 +45,11 @@ class BookReservationController extends Controller
      */
     public function store(Request $request, Book $book)
     {
-        // dump($book);
-        // dd($request->all());
         $reservation = $this->reservationService->getFromCookieOrCreate();
-
-        $quantity = $reservation->books()
-            ->find($book->id)
-            ->pivot
-            ->quantity ?? 0;
+        // $quantity = $reservation->books()
+        //     ->find($book->id)
+        //     ->pivot
+        //     ->quantity ?? 0;
 
         // if ($book->stock < $quantity + 1) {
         //     throw ValidationException::withMessages([
@@ -57,8 +58,16 @@ class BookReservationController extends Controller
         //     ]);
         // }
 
+        $dates = explode(' to ', $request->date_range);
+
+        $startDate = Carbon::parse(trim($dates[0]));
+        $endDate = Carbon::parse(trim($dates[1]));
+
         $reservation->books()->syncWithoutDetaching([
-            $book->id => ['quantity' => $quantity + 1]
+            $book->id => [
+                'start_date' => $startDate->format('Y-m-d H:i:s'),
+                'end_date' => $endDate->format('Y-m-d H:i:s'),
+            ]
         ]);
 
         $reservation->touch();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel;
+namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -13,7 +13,6 @@ class MainController extends Controller
     public function index(Request $request)
     {
         // DB::connection()->enableQueryLog();
-        // dd('');
         $books = Book::all();
         return view('welcome', compact('books'));
     }

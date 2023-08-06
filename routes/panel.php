@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Panel\BookController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\PanelController;
@@ -22,12 +21,6 @@ Route::get('/', [PanelController::class, 'index'])->name('panel.index');
  * =================================
  */
 Route::resource('books', BookController::class);
-/**
- * =================================
- * orders
- * =================================
- */
-Route::resource('orders', OrderController::class)->only(['create', 'store'])->middleware(['verified']);
 /**
  * =================================
  * users

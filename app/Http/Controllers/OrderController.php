@@ -18,6 +18,7 @@ class OrderController extends Controller
     public function __construct(ReservationService $reservationService)
     {
         $this->reservationService = $reservationService;
+        // $this->middleware('auth');
     }
 
     /**
@@ -48,7 +49,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        return DB::transaction(function () use ($request): void {
+        return DB::transaction(function () use ($request) {
             $user = $request->user();
             $order = $user->orders()->create([
                 'status' => 'confirmed'
@@ -74,7 +75,9 @@ class OrderController extends Controller
                 });
             dd($reservationProductsWithQuantity);
             $order->products()->attach($reservationProductsWithQuantity->toArray());
+            return redirect()->route('reservations.index', ['order' => $order]);
         }, 5);
+
     }
 
     /**

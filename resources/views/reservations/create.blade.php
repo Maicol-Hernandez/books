@@ -12,15 +12,13 @@
                     Show a second modal and hide this one with the button below.
                     @csrf
                     <div class="mb-3">
-                        <!-- resources/views/tu-vista.blade.php -->
                         <label for="fecha">Fecha:</label>
-                        <input type="text" id="fecha" name="fecha" class="datepicker">
+                        <input type="text" id="fecha" name="date_range" class="form-control datepicker" required>
                     </div>
-
 
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="text" class="form-control" id="recipient-name" required>
                     </div>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Message:</label>

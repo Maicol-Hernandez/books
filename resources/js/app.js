@@ -2,16 +2,15 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 document.addEventListener('DOMContentLoaded', function () {
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+
     flatpickr('.datepicker', {
         mode: "range",
-        // minDate: "today",
-        // dateFormat: "Y-m-d",
-        // disable: [
-        //     function (date) {
-        //         // disable every multiple of 8
-        //         return !(date.getDate() % 8);
-        //     }
-        // ]
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        // dateFormat: "H:i",
+        defaultDate: [currentDate, formattedCurrentDate]
     });
 });
 

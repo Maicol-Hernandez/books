@@ -25,14 +25,17 @@ class BookSeeder extends Seeder
                 $reservarion = $reservarions->random();
 
                 $reservarion->books()->attach([
-                    $book->id => ['quantity' => mt_rand(1, 3)]
+                    $book->id => [
+                        'start_date' => now(),
+                        'end_date' => now()->addDays(5)
+                    ],
                 ]);
 
                 $orders = $orders->random();
 
-                $orders->books()->attach([
-                    $book->id => ['quantity' => mt_rand(1, 3)]
-                ]);
+                // $orders->books()->attach([
+                //     $book->id => ['quantity' => mt_rand(1, 3)]
+                // ]);
 
                 $images = Image::factory(mt_rand(2, 4))->make();
 

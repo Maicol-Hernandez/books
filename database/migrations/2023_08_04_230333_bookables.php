@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookables', function (Blueprint $table) {
             $table->bigInteger('book_id')->unsigned();
-            $table->integer('quantity')->unsigned();
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->morphs('bookable');
 
             $table->foreign('book_id')->references('id')->on('books');

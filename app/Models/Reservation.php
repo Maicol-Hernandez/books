@@ -18,7 +18,7 @@ class Reservation extends Model
      */
     public function books(): MorphToMany
     {
-        return $this->morphToMany(Book::class, 'bookable')->withPivot('quantity');
+        return $this->morphToMany(Book::class, 'bookable');
     }
 
     /**
