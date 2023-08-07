@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
         User::factory(20)->create();
 
         $this->call([
-            ImageSeeder::class,
             ReservationSeeder::class,
-            CategorySeeder::class,
             BookSeeder::class,
+            CategorySeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }

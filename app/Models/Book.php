@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use App\Models\Scopes\AvailableScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -47,6 +48,7 @@ class Book extends Model
         'author',
         'description',
         'status',
+        'category_id'
     ];
 
     /** 
