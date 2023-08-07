@@ -48,7 +48,7 @@ class Book extends Model
         'author',
         'description',
         'status',
-        'category_id'
+        'category_id',
     ];
 
     /** 
@@ -94,13 +94,13 @@ class Book extends Model
     }
 
     /**
-     * The Reservations that belong to the Books
+     * Get the category that owns the Book
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->morphOne(Category::class, 'categoryable');
+        return $this->belongsTo(Book::class);
     }
 
     /**

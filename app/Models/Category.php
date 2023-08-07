@@ -23,13 +23,5 @@ class Category extends Model
         'name'
     ];
 
-    /**
-     * The products that belong to the Cart
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function books(): MorphToMany
-    {
-        return $this->morphToMany(PanelBook::class, 'bookable');
-    }
+
 }

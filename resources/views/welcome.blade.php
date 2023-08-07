@@ -12,33 +12,29 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header d-block d-md-flex">
-                            <div class="col">
-                                <h5 class="mb-md-0 h6">{{ __('Books') }}</h5>
-                            </div>
-                            <div class="col-md-4">
-                                {{-- Search --}}
-                                <form class="" id="" action="" method="GET">
+                        <form class="" id="filter" action="" method="GET">
+                            <div class="card-header d-block d-md-flex">
+                                <div class="col">
+                                    <h5 class="mb-md-0 h6">{{ __('Books') }}</h5>
+                                </div>
+                                <div class="col-md-4">
+                                    {{-- Search --}}
                                     <div class="input-group input-group-sm">
-                                        {{-- <div class="mb-3">
-                                            <label for="" class="form-label">City</label>
-                                        </div> --}}
-
-                                        <select class="form-select form-select-sm" name="" id="">
-                                            <option selected>Select one</option>
-                                            <option value="">New Delhi</option>
-                                            <option value="">Istanbul</option>
-                                            <option value="">Jakarta</option>
+                                        <select class="form-select form-select-sm" name="category" id="">
+                                            {{-- <option selected>Select Category</option> --}}
+                                            @foreach ($categories as $key => $name)
+                                                <option value="{{ $key }}">{{ $name }}</option>
+                                            @endforeach
                                         </select>
-
-                                        {{-- <input type="text" class="form-control form-control-sm" id="search"
-                                            name="search"
-                                            @isset($sort_search) value="{{ $sort_search }}" @endisset
-                                            placeholder="Type & Enter"> --}}
                                     </div>
-                                </form>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-group mb-0">
+                                        <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
 
                         <div class="card-body">
                             <div class="table-responsive">
