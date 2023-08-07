@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Category extends Model
 {
@@ -23,12 +24,12 @@ class Category extends Model
     ];
 
     /**
-     * Get all of the books for the Category
+     * The products that belong to the Cart
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function books(): HasMany
+    public function books(): MorphToMany
     {
-        return $this->hasMany(Book::class);
+        return $this->morphToMany(PanelBook::class, 'bookable');
     }
 }

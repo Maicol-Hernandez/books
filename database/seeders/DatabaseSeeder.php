@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ReservationSeeder::class,
-            BookSeeder::class,
             CategorySeeder::class,
+            BookSeeder::class,
             ImageSeeder::class,
         ]);
     }
