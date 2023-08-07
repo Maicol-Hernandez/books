@@ -1,7 +1,7 @@
 <tr>
     <td scope="row">{{ $book->id }}</td>
     <td scope="row">
-        <div class="row">
+        {{-- <div class="row"> --}}
             <div class="col-md-6">
                 <div class="card border-0 shadow-none">
                     <div class="card-body">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        {{-- </div> --}}
     </td>
     <td scope="row">{{ $book->author }}</td>
     <td scope="row">{{ $book->description }}</td>

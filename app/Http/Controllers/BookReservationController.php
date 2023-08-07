@@ -48,18 +48,6 @@ class BookReservationController extends Controller
         $reservation = $this->reservationService->getFromCookieOrCreate();
 
         DB::transaction(function () use ($request, $reservation, $book) {
-            // $quantity = $reservation->books()
-            //     ->find($book->id)
-            //     ->pivot
-            //     ->quantity ?? 0;
-
-            // if ($book->stock < $quantity + 1) {
-            //     throw ValidationException::withMessages([
-            //         'boo$book' => "There is not enough stock for the quantity you required of {$book->title}",
-
-            //     ]);
-            // }
-
             $dates = explode(' to ', $request->date_range);
 
             $startDate = Carbon::parse(trim($dates[0]));
@@ -80,7 +68,10 @@ class BookReservationController extends Controller
         }, 5);
 
         $cookie = $this->reservationService->makeCookie($reservation);
-        return redirect()->back()->cookie($cookie);
+
+        return redirect()->back()
+            ->cookie($cookie)
+            ->with('success', 'Reservation successfully completed.');
     }
 
     /**
@@ -126,6 +117,8 @@ class BookReservationController extends Controller
 
         $cookie = $this->reservationService->makeCookie($reservation);
 
-        return redirect()->back()->cookie($cookie);
+        return redirect()->back()
+            ->cookie($cookie)
+            ->with('success', 'The reservation has been successfully deleted.');
     }
 }

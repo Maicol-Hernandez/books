@@ -39,12 +39,14 @@
                                 <a class="nav-link" href="{{ route('panel.index') }}">{{ __('Panel') }}</a>
                             </li>
                         @endif
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('reservations.index') }}">{{ __('Reservations') }}
-                                @inject('reservationService', 'App\Services\ReservationService')
-                                ({{ $reservationService->countBooks() }})
-                            </a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('reservations.index') }}">{{ __('Reservations') }}
+                                    @inject('reservationService', 'App\Services\ReservationService')
+                                    ({{ $reservationService->countBooks() }})
+                                </a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -117,7 +119,7 @@
 
                 {{-- Script --}}
                 @yield('script')
-                
+
             </div>
         </main>
     </div>
