@@ -3,27 +3,21 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="reservationModalToggleLabel">Modal 1</h5>
+                <h5 class="modal-title" id="reservationModalToggleLabel">Reservation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="d-inline" method="POST"
-                action="{{ route('books.reservations.store', ['book' => $book->id]) }}">
+            <form class="" method="POST" action="{{ route('books.reservations.store', ['book' => $book->id]) }}">
                 <div class="modal-body">
-                    Show a second modal and hide this one with the button below.
                     @csrf
                     <div class="mb-3">
-                        <label for="fecha">Fecha:</label>
+                        <label class="form-label" for="fecha">Date:</label>
                         <input type="text" id="fecha" name="date_range" class="form-control datepicker" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Notes:</label>
+                        <textarea class="form-control" id="message-text" placeholder="Notes" required></textarea>
+                    </div>
 
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

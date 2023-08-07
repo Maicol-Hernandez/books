@@ -13,11 +13,17 @@ class MainController extends Controller
 
     public function index(Request $request)
     {
-        // DB::connection()->enableQueryLog();
-        dump($request->all());
+        $query = null;
+        $books = Book::all();
+        if ($request->has('category_id')) {
+            $books = $books->where('category_id', $request->category_id);
+            $query['category_id'] = $request->category_id;
+        }
+
         return view('welcome')->with([
-            'books' => Book::all(),
-            'categories' => Category::all()->pluck('name', 'id')
+            'books' => $books,
+            'categories' => Category::all()->pluck('name', 'id'),
+            'query' => $query,
         ]);
     }
 }

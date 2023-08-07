@@ -20,10 +20,14 @@
                                 <div class="col-md-4">
                                     {{-- Search --}}
                                     <div class="input-group input-group-sm">
-                                        <select class="form-select form-select-sm" name="category" id="">
+                                        {{-- @dump($query['category_id']) --}}
+                                        <select class="form-select form-select-sm" name="category_id" id="">
                                             {{-- <option selected>Select Category</option> --}}
                                             @foreach ($categories as $key => $name)
-                                                <option value="{{ $key }}">{{ $name }}</option>
+                                                <option value="{{ $key }}"
+                                                    {{ isset($query['category_id']) && $query['category_id'] == $key ? 'selected' : '' }}>
+                                                    {{ $name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -45,6 +49,7 @@
                                             <th scope="col">Title</th>
                                             <th scope="col">Author</th>
                                             <th scope="col">description</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -65,13 +70,3 @@
         {{-- @dd(\Illuminate\Support\Facades\DB::getQueryLog()) --}}
     </div>
 @endsection
-
-
-<script type="text/javascript">
-    // const showModal = () => {
-    //     // const reservationModal = document.getElementById('reservationModal')
-    //     const reservationModal = new bootstrap.Modal(document.getElementById('reservationModal'));
-
-    //     reservationModal.show()
-    // }
-</script>

@@ -100,7 +100,7 @@ class Book extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
